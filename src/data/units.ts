@@ -1,3 +1,6 @@
+import { vrboPulled } from "./vrboPulled.generated";
+import { vrboManual } from "./vrboManual";
+
 export type Review = {
   author: string;
   rating: number; // 1–5
@@ -22,8 +25,58 @@ export type Unit = {
   nightlyFrom: number; // approximate starting nightly rate (USD)
 };
 
+// ---------------------------------------------------------------------------
+// Merge helper — wires real VRBO-scraped data over placeholder values.
+//
+// Override policy:
+//   vrboUrl   → always from pulled (the real listing URLs are the main win)
+//   photos    → from pulled.images when non-empty; else keep placeholder
+//   amenities → from pulled.amenities when it has > 1 item; a single "tv"
+//               entry is treated as an incomplete scrape, so we keep the
+//               richer placeholder list until the scraper returns full data
+// ---------------------------------------------------------------------------
+type PulledUnit = { unitId: string; vrboUrl: string; images: string[]; amenities: string[] };
+
+const pulledMap = Object.fromEntries(
+  (vrboPulled as unknown as PulledUnit[]).map((p) => [p.unitId, p])
+) as Record<string, PulledUnit>;
+
+function withPulled(base: Unit): Unit {
+  const p = pulledMap[base.id];
+  if (!p) return base;
+  return {
+    ...base,
+    vrboUrl: p.vrboUrl,
+    ...(p.images.length > 0    && { photos:    p.images }),
+    ...(p.amenities.length > 1 && { amenities: p.amenities }),
+  };
+}
+
+// Merge hand-curated vrboManual data over a unit.
+// title → name, description, highlights → amenities, images → photos,
+// reviews mapped from /10 rating to /5.
+function withManual(base: Unit): Unit {
+  const m = vrboManual[base.id];
+  if (!m) return base;
+  return {
+    ...base,
+    name: m.title,
+    description: m.description,
+    amenities: m.highlights,
+    photos: m.images,
+    reviews: m.reviews.map((r) => ({
+      author: r.name,
+      date: r.date,
+      rating: Math.round(r.rating / 2),
+      text: r.quote,
+    })),
+  };
+}
+
+// ---------------------------------------------------------------------------
+
 export const UNITS: Unit[] = [
-  {
+  withPulled({
     id: "35",
     name: "Unit 35",
     tagline: "Peaceful garden retreat steps from the pool",
@@ -75,8 +128,8 @@ export const UNITS: Unit[] = [
     ],
     vrboUrl: "https://www.vrbo.com/",
     nightlyFrom: 185,
-  },
-  {
+  }),
+  withManual(withPulled({
     id: "87",
     name: "Unit 87",
     tagline: "Sweeping ocean views with a front-row seat to Poipu sunsets",
@@ -129,8 +182,8 @@ export const UNITS: Unit[] = [
     ],
     vrboUrl: "https://www.vrbo.com/",
     nightlyFrom: 295,
-  },
-  {
+  })),
+  withPulled({
     id: "56",
     name: "Unit 56",
     tagline: "Bright poolside escape with a tropical island vibe",
@@ -175,8 +228,8 @@ export const UNITS: Unit[] = [
     ],
     vrboUrl: "https://www.vrbo.com/",
     nightlyFrom: 195,
-  },
-  {
+  }),
+  withPulled({
     id: "128",
     name: "Unit 128",
     tagline: "Spacious two-bedroom haven with garden and partial ocean views",
@@ -230,8 +283,8 @@ export const UNITS: Unit[] = [
     ],
     vrboUrl: "https://www.vrbo.com/",
     nightlyFrom: 320,
-  },
-  {
+  }),
+  withPulled({
     id: "151",
     name: "Unit 151",
     tagline: "Romantic ground-floor garden villa with direct outdoor access",
@@ -278,7 +331,7 @@ export const UNITS: Unit[] = [
     ],
     vrboUrl: "https://www.vrbo.com/",
     nightlyFrom: 210,
-  },
+  }),
 ];
 
 export const UNITS_BY_ID: Record<string, Unit> = Object.fromEntries(
