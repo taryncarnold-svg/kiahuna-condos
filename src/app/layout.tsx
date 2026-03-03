@@ -6,9 +6,9 @@ import "./globals.css";
 const geist = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Kiahuna Condos | Poipu, Kauai Vacation Rentals",
+  title: "Kiahuna Condos · Poipu, Kauai",
   description:
-    "Book direct and save on privately owned condos at Kiahuna Plantation, Poipu, Kauai. Ocean views, garden retreats, and poolside escapes — no VRBO fees.",
+    "Five privately owned condos at Kiahuna Plantation on Kauai's sunny south shore. Steps from Poipu Beach. Book straight from the owner.",
 };
 
 export default function RootLayout({
@@ -16,14 +16,19 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${geist.variable} font-sans antialiased bg-stone-50 text-stone-800`}>
+      <body className={`${geist.variable} font-sans antialiased bg-white text-stone-900`}>
         <Nav />
         {children}
-        <footer className="mt-16 border-t border-stone-200 bg-white py-8 text-center text-sm text-stone-400">
-          © {new Date().getFullYear()} Kiahuna Condos · Poipu, Kauai, Hawaii ·{" "}
-          <a href="mailto:owner@kiahunacondos.com" className="hover:text-stone-600 underline">
-            owner@kiahunacondos.com
-          </a>
+        <footer className="mt-24 border-t border-stone-100 py-10 px-6">
+          <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-stone-400">
+            <span>© {new Date().getFullYear()} Kiahuna Condos · Poipu, Kauai, Hawaii</span>
+            <a
+              href="mailto:owner@kiahunacondos.com"
+              className="hover:text-stone-600 transition-colors"
+            >
+              owner@kiahunacondos.com
+            </a>
+          </div>
         </footer>
       </body>
     </html>
