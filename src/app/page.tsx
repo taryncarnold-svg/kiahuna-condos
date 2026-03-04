@@ -98,10 +98,10 @@ export default function Home() {
 
         {/* Headline — lower third */}
         <div className="absolute inset-0 flex flex-col items-center justify-end pb-28 px-6 text-center">
-          <p className="text-[11px] tracking-[0.22em] uppercase text-white/90 mb-4">
+          <p className="text-[13px] tracking-[0.22em] uppercase text-white/90 mb-2">
             Kiahuna Plantation · Poipu, Kauai
           </p>
-          <h1 className="text-4xl sm:text-5xl font-light text-white leading-snug mb-4 drop-shadow-sm">
+          <h1 className="text-4xl sm:text-5xl font-light text-white leading-snug mb-2 drop-shadow-sm">
             Steps from the beach.<br />Miles from stress.
           </h1>
           <p className="text-white/90 text-base max-w-md leading-relaxed">
