@@ -18,17 +18,22 @@ function bookingMailto(unitId: string, checkIn: string, checkOut: string) {
   return `mailto:${BOOKING_EMAIL}?subject=${subject}&body=${body}`;
 }
 
-function AvailabilityDot({ status }: { status: boolean | null }) {
+function AvailabilityPill({ status }: { status: boolean | null }) {
+  if (status === null) return null;
   return (
     <span
-      className={`absolute top-3 right-3 flex items-center justify-center gap-1.5 rounded-full bg-white/90 backdrop-blur px-2.5 py-1 text-xs font-medium shadow-sm min-w-[88px] ${status === true ? "text-stone-600" : "text-stone-400"}`}
+      className={`absolute top-3 right-3 flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold shadow-sm backdrop-blur ${
+        status
+          ? "bg-emerald-50/95 text-emerald-700 ring-1 ring-emerald-200"
+          : "bg-white/90 text-stone-400 ring-1 ring-stone-200"
+      }`}
     >
       <span
         className={`h-1.5 w-1.5 rounded-full flex-shrink-0 ${
-          status === true ? "bg-emerald-700/60" : "bg-stone-300"
+          status ? "bg-emerald-500" : "bg-stone-300"
         }`}
       />
-      {status === true ? "Available" : status === false ? "Booked" : "—"}
+      {status ? "Available" : "Booked"}
     </span>
   );
 }
@@ -73,8 +78,7 @@ export default function Home() {
     <>
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section
-        className="hero-section relative overflow-hidden"
-        style={{ minHeight: "55vh" }}
+        className="hero-section relative overflow-hidden min-h-[38vh] sm:min-h-[55vh]"
       >
         <Image
           src="https://media.vrbo.com/lodging/104000000/103640000/103636400/103636320/648485f6.jpg?impolicy=resizecrop&rw=1200&ra=fit"
@@ -95,21 +99,21 @@ export default function Home() {
         />
 
         {/* Headline — lower third */}
-        <div className="absolute inset-0 flex flex-col items-center justify-end pb-28 px-6 text-center">
-          <p className="text-[13px] tracking-[0.22em] uppercase text-white/90 mb-2">
+        <div className="absolute inset-0 flex flex-col items-center justify-end pb-20 sm:pb-28 px-6 text-center">
+          <p className="text-[11px] sm:text-[13px] tracking-[0.22em] uppercase text-white/90 mb-2">
             Kiahuna Plantation · Poipu, Kauai
           </p>
-          <h1 className="text-4xl sm:text-5xl font-light text-white leading-snug mb-2 drop-shadow-sm">
+          <h1 className="text-3xl sm:text-5xl font-light text-white leading-snug mb-2 drop-shadow-sm">
             Steps from the beach.<br />Miles from stress.
           </h1>
-          <p className="text-white/90 text-base max-w-md leading-relaxed">
+          <p className="hidden sm:block text-white/90 text-base max-w-md leading-relaxed">
             Five privately owned condos at Kiahuna Plantation — book direct with the owner.
           </p>
         </div>
       </section>
 
       {/* ── Booking card — overlaps hero ─────────────────────────────────── */}
-      <div className="relative z-10 -mt-14 px-6">
+      <div className="relative z-10 -mt-10 sm:-mt-14 px-4 sm:px-6">
         <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
           <form
             onSubmit={handleSearch}
@@ -159,7 +163,7 @@ export default function Home() {
       </div>
 
       {/* ── Units ────────────────────────────────────────────────────────── */}
-      <section className="max-w-6xl mx-auto px-6 pt-14 pb-24">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-10 sm:pt-14 pb-16 sm:pb-24">
         {searched && (
           <p className="text-xs text-stone-400 mb-8 tracking-wide">
             Showing availability for{" "}
@@ -169,7 +173,7 @@ export default function Home() {
           </p>
         )}
 
-        <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
           {UNITS.map((unit) => {
             const result = results[unit.id];
             const available = result?.available ?? null;
@@ -193,7 +197,7 @@ export default function Home() {
                     unoptimized
                   />
                   <div className={`absolute inset-0 bg-stone-100/30 motion-safe:transition-opacity motion-safe:duration-200 ${isUnavailable ? "opacity-100" : "opacity-0"}`} />
-                  {searched && <AvailabilityDot status={available} />}
+                  {searched && <AvailabilityPill status={available} />}
                 </div>
 
                 {/* Row 1: Title · Price */}
