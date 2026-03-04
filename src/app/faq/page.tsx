@@ -4,90 +4,127 @@ import { BOOKING_EMAIL } from "@/data/units";
 
 export const metadata: Metadata = {
   title: "FAQ | Kiahuna Condos",
-  description: "Frequently asked questions about booking, amenities, and staying at Kiahuna Plantation in Poipu, Kauai.",
+  description: "Frequently asked questions about booking, check-in, amenities, and staying at Kiahuna Plantation in Poipu, Kauai.",
 };
 
-const FAQS = [
+const SECTIONS = [
   {
-    q: "How do I book a condo directly?",
-    a: `Click "Book Direct" or "Request Booking" on any unit page. This opens your email client with the unit details pre-filled. Send the email and the owner will respond — usually within a few hours — to confirm availability and arrange payment.`,
+    heading: "Booking & Availability",
+    faqs: [
+      {
+        q: "What's the best way to check availability?",
+        a: "You can check availability right here on the website by selecting your dates on the home page. If you're not sure which condo might be the best fit, feel free to reach out — Deena is happy to help you find the right one.",
+      },
+      {
+        q: "Do you offer direct booking, or only through Vrbo?",
+        a: "All first-time guests book through Vrbo. It keeps everything simple and secure for new stays.\n\nIf you've stayed with us before, you're welcome to either book again through Vrbo or reach out to Deena directly to arrange a repeat visit.",
+      },
+      {
+        q: "How far in advance should we book?",
+        a: "Kauai trips tend to get planned early — especially during the winter months and around holidays. If you see availability for your dates, it's usually a good idea to reserve sooner rather than later.",
+      },
+    ],
   },
   {
-    q: "Is booking direct really cheaper than VRBO?",
-    a: "Yes. VRBO charges guests a service fee of 10–15% on top of the nightly rate. When you book direct, that fee disappears entirely. The owner passes the savings on to you — same condo, lower price.",
+    heading: "Check-In & Stay Details",
+    faqs: [
+      {
+        q: "What time is check-in and check-out?",
+        a: "Check-in begins at 3:00 p.m. and check-out is at 10:00 a.m. This gives the cleaners enough time to make sure each condo is perfectly prepared for the next guests arriving.",
+      },
+      {
+        q: "How do we access the condo?",
+        a: "Guests receive detailed check-in instructions before arrival. The process is designed to be simple so you can arrive and settle in easily — even after a long travel day.",
+      },
+      {
+        q: "How many guests can stay in each condo?",
+        a: "Each condo comfortably accommodates up to four guests. The units are one-bedroom, but the living room includes a pull-out sofa bed, which works well for families or small groups.",
+      },
+    ],
   },
   {
-    q: "What payment methods are accepted for direct bookings?",
-    a: "The owner accepts Zelle, Venmo, bank transfer, and personal check. Payment details and terms will be confirmed when the owner replies to your booking request.",
+    heading: "Location & Resort",
+    faqs: [
+      {
+        q: "Where is Kiahuna Plantation located?",
+        a: "Kiahuna Plantation is in Poipu, on Kauai's sunny south shore — one of the most popular areas on the island for beaches, restaurants, and easy exploring.",
+      },
+      {
+        q: "How close is the beach?",
+        a: "Very close — it's one of the best parts about staying here. You can walk straight from the condos across the lawn to the ocean. No driving, no parking, no hassle.",
+      },
+      {
+        q: "Is there a pool on the property?",
+        a: "Kiahuna Plantation guests have access to the Poipu Beach Athletic Club, which includes a pool and fitness facilities. It's just a short walk across the street from the resort.",
+      },
+      {
+        q: "What else is nearby?",
+        a: "Quite a bit, actually. Poipu has plenty of restaurants, coffee shops, and small shopping areas within easy walking distance, so you can explore without ever needing to get in the car.",
+      },
+    ],
   },
   {
-    q: "Is there a minimum stay?",
-    a: "Most weeks require a minimum of 5–7 nights, though shorter stays may be available for last-minute gaps. Mention your desired dates in your booking request and the owner will let you know.",
-  },
-  {
-    q: "What is the cancellation policy for direct bookings?",
-    a: "Cancellations made 60+ days before check-in receive a full refund. 30–59 days out: 50% refund. Under 30 days: no refund, but the owner will make every effort to rebook the unit and refund if successful. Full details are included in the rental agreement.",
-  },
-  {
-    q: "Where exactly is Kiahuna Plantation?",
-    a: "Kiahuna Plantation Resort is located at 2253 Poipu Rd, Koloa, HI 96756 — in the heart of Poipu on Kauai's sunny south shore. It's a short walk to Poipu Beach Park, one of America's best beaches, and minutes from shops, restaurants, and watersports.",
-  },
-  {
-    q: "Is Poipu Beach within walking distance?",
-    a: "Yes! Poipu Beach Park is a 5–10 minute walk from the resort gates. The beach gear provided with each unit (chairs, towels, snorkel set) makes it easy to head down whenever you like.",
-  },
-  {
-    q: "Is there a pool on the property?",
-    a: "Yes, Kiahuna Plantation has multiple swimming pools spread across the resort grounds. All guests of our units have full access.",
-  },
-  {
-    q: "Are the condos air-conditioned?",
-    a: "All five units have central air conditioning as well as ceiling fans. Kauai's trade winds are often enough to keep things comfortable, but the AC is there when you need it.",
-  },
-  {
-    q: "Can I bring my pet?",
-    a: "Unfortunately, pets are not permitted at any of our units per Kiahuna Plantation's resort policy.",
-  },
-  {
-    q: "Is there parking at the resort?",
-    a: "Yes, each unit comes with at least one covered parking space. Unit 128 includes two spaces.",
-  },
-  {
-    q: "What if I have questions that aren't answered here?",
-    a: `Reach out directly! Email ${BOOKING_EMAIL} or visit our Contact page and the owner will get back to you promptly.`,
+    heading: "Amenities",
+    faqs: [
+      {
+        q: "Do the condos have air conditioning?",
+        a: "Yes — all of the condos have air conditioning, and some units include dual AC systems for extra comfort. Kauai's trade winds are often all you need, but it's nice to have options.",
+      },
+      {
+        q: "Is beach gear provided?",
+        a: "Yes! Each condo includes beach gear for guests to use — things like chairs and other essentials for enjoying the beach. No need to rent or pack bulky gear.",
+      },
+    ],
   },
 ];
 
 export default function FAQPage() {
   return (
-    <main className="max-w-2xl mx-auto px-4 py-10">
+    <main className="max-w-2xl mx-auto px-4 py-8 sm:py-12">
       <div className="mb-10">
-        <h1 className="text-3xl font-bold text-stone-800 mb-2">Frequently asked questions</h1>
-        <p className="text-stone-500">
+        <h1 className="text-2xl sm:text-3xl font-light text-stone-800 mb-2">
+          Frequently asked questions
+        </h1>
+        <p className="text-sm text-stone-500">
           Everything you need to know about booking and staying at Kiahuna Condos.
         </p>
       </div>
 
-      <div className="space-y-6">
-        {FAQS.map(({ q, a }) => (
-          <div key={q} className="border-b border-stone-100 pb-6">
-            <h2 className="font-semibold text-stone-800 mb-2">{q}</h2>
-            <p className="text-stone-600 text-sm leading-relaxed">{a}</p>
-          </div>
+      <div className="space-y-12">
+        {SECTIONS.map(({ heading, faqs }) => (
+          <section key={heading}>
+            <h2 className="text-[11px] font-semibold tracking-[0.18em] uppercase text-stone-400 mb-5">
+              {heading}
+            </h2>
+            <div className="space-y-0">
+              {faqs.map(({ q, a }) => (
+                <div key={q} className="border-t border-stone-100 py-5 last:border-b">
+                  <h3 className="text-sm font-medium text-stone-800 mb-2">{q}</h3>
+                  <div className="space-y-2">
+                    {a.split("\n\n").map((para, i) => (
+                      <p key={i} className="text-sm text-stone-500 leading-relaxed">
+                        {para}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
         ))}
       </div>
 
-      <div className="mt-12 bg-teal-50 border border-teal-100 rounded-2xl p-6">
-        <p className="font-semibold text-stone-800 mb-1">Still have questions?</p>
+      <div className="mt-12 bg-stone-50 border border-stone-200 rounded-2xl p-6">
+        <p className="font-medium text-stone-800 mb-1">Still have questions?</p>
         <p className="text-sm text-stone-500 mb-4">
-          The owner is happy to help — reach out any time.
+          Deena is happy to help — reach out any time.
         </p>
         <div className="flex flex-wrap gap-3">
           <Link
             href="/contact"
-            className="bg-teal-600 hover:bg-teal-700 text-white text-sm font-semibold py-2 px-5 rounded-lg transition-colors"
+            className="bg-stone-900 hover:bg-stone-700 text-white text-sm font-medium py-2 px-5 rounded-lg transition-colors"
           >
-            Contact us
+            Get in touch
           </Link>
           <a
             href={`mailto:${BOOKING_EMAIL}`}

@@ -19,21 +19,26 @@ function bookingMailto(unitId: string, checkIn: string, checkOut: string) {
 }
 
 function AvailabilityPill({ status }: { status: boolean | null }) {
-  if (status === null) return null;
+  if (status === true) {
+    return (
+      <span className="absolute top-3 right-3 flex items-center gap-1.5 rounded-full bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200 px-2.5 py-1 text-xs font-semibold shadow-sm">
+        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 flex-shrink-0" />
+        Available
+      </span>
+    );
+  }
+  if (status === false) {
+    return (
+      <span className="absolute top-3 right-3 flex items-center gap-1.5 rounded-full bg-white/90 text-stone-400 ring-1 ring-stone-200 px-2.5 py-1 text-xs font-semibold shadow-sm backdrop-blur">
+        <span className="h-1.5 w-1.5 rounded-full bg-stone-300 flex-shrink-0" />
+        Booked
+      </span>
+    );
+  }
+  // null = iCal feed unavailable — still render so users can see the check ran
   return (
-    <span
-      className={`absolute top-3 right-3 flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold shadow-sm backdrop-blur ${
-        status
-          ? "bg-emerald-50/95 text-emerald-700 ring-1 ring-emerald-200"
-          : "bg-white/90 text-stone-400 ring-1 ring-stone-200"
-      }`}
-    >
-      <span
-        className={`h-1.5 w-1.5 rounded-full flex-shrink-0 ${
-          status ? "bg-emerald-500" : "bg-stone-300"
-        }`}
-      />
-      {status ? "Available" : "Booked"}
+    <span className="absolute top-3 right-3 flex items-center rounded-full bg-white/80 text-stone-400 ring-1 ring-stone-200 px-2.5 py-1 text-xs shadow-sm backdrop-blur">
+      —
     </span>
   );
 }
