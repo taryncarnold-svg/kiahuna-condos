@@ -49,6 +49,7 @@ export default async function UnitPage({ params }: Props) {
       {/* Header */}
       <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
         <div>
+          <p className="text-xs text-stone-400 mb-1 tracking-wide">Unit {unit.id}</p>
           <h1 className="text-3xl font-bold text-stone-800">{unit.name}</h1>
           <p className="text-stone-500 mt-1">{unit.tagline}</p>
         </div>
@@ -88,7 +89,7 @@ export default async function UnitPage({ params }: Props) {
             <span>🛏 {unit.bedrooms} bedroom{unit.bedrooms !== 1 ? "s" : ""}</span>
             <span>🚿 {unit.bathrooms} bathroom{unit.bathrooms !== 1 ? "s" : ""}</span>
             <span>👥 Up to {unit.maxGuests} guests</span>
-            <span>📐 {unit.sqft} sq ft</span>
+
           </div>
 
           {/* Description */}

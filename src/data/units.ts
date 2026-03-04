@@ -15,10 +15,10 @@ export type Unit = {
   bedrooms: number;
   bathrooms: number;
   maxGuests: number;
-  sqft: number;
   view: string;
   description: string;
   amenities: string[];
+  quickTags: string[];
   photos: string[]; // placeholder URLs — swap for real /photos/*.jpg when ready
   reviews: Review[];
   vrboUrl: string;
@@ -76,15 +76,15 @@ function withManual(base: Unit): Unit {
 // ---------------------------------------------------------------------------
 
 export const UNITS: Unit[] = [
-  withPulled({
+  withManual(withPulled({
     id: "35",
     name: "Unit 35",
     tagline: "Peaceful garden retreat steps from the pool",
     bedrooms: 1,
     bathrooms: 1,
-    maxGuests: 2,
-    sqft: 650,
-    view: "Garden View",
+    maxGuests: 4,
+    view: "Ocean View",
+    quickTags: ["Ocean view", "Balcony", "Top floor", "Dual AC"],
     description:
       "Unit 35 is a beautifully appointed one-bedroom condo tucked into the lush tropical gardens of Kiahuna Plantation. Enjoy your morning coffee on the lanai surrounded by birds of paradise and plumeria, then stroll just a few steps to the pool. Inside, you'll find a fully equipped kitchen, a king bed, and everything you need for a relaxing Kauai getaway.",
     amenities: [
@@ -128,16 +128,16 @@ export const UNITS: Unit[] = [
     ],
     vrboUrl: "https://www.vrbo.com/",
     nightlyFrom: 185,
-  }),
+  })),
   withManual(withPulled({
     id: "87",
     name: "Unit 87",
     tagline: "Sweeping ocean views with a front-row seat to Poipu sunsets",
-    bedrooms: 2,
-    bathrooms: 2,
+    bedrooms: 1,
+    bathrooms: 1,
     maxGuests: 4,
-    sqft: 1050,
-    view: "Ocean View",
+    view: "Garden View",
+    quickTags: ["Ground floor", "Lanai", "Garden"],
     description:
       "Unit 87 offers breathtaking panoramic ocean views from its generous lanai — the perfect spot to watch humpback whales in winter or sip a mai tai as the sun dips below the horizon. This spacious two-bedroom, two-bathroom condo sleeps up to four and features a thoughtfully updated interior with beach-casual style. Poipu Beach is a short walk away.",
     amenities: [
@@ -183,15 +183,15 @@ export const UNITS: Unit[] = [
     vrboUrl: "https://www.vrbo.com/",
     nightlyFrom: 295,
   })),
-  withPulled({
+  withManual(withPulled({
     id: "56",
     name: "Unit 56",
     tagline: "Bright poolside escape with a tropical island vibe",
     bedrooms: 1,
     bathrooms: 1,
-    maxGuests: 2,
-    sqft: 680,
-    view: "Pool View",
+    maxGuests: 4,
+    view: "Garden View",
+    quickTags: ["Ground floor", "End unit", "Dual AC", "Lanai"],
     description:
       "Unit 56 puts you right in the heart of the resort action — just steps from the sparkling pool, with a breezy lanai that looks out over the water and swaying palms. This one-bedroom condo has been freshly updated with cheerful coastal décor, a comfortable king bed, and a full kitchen stocked with everything you need to cook a fresh Kauai catch.",
     amenities: [
@@ -228,16 +228,16 @@ export const UNITS: Unit[] = [
     ],
     vrboUrl: "https://www.vrbo.com/",
     nightlyFrom: 195,
-  }),
-  withPulled({
+  })),
+  withManual(withPulled({
     id: "128",
     name: "Unit 128",
     tagline: "Spacious two-bedroom haven with garden and partial ocean views",
-    bedrooms: 2,
-    bathrooms: 2,
-    maxGuests: 5,
-    sqft: 1100,
+    bedrooms: 1,
+    bathrooms: 1,
+    maxGuests: 4,
     view: "Garden & Partial Ocean View",
+    quickTags: ["Ground floor", "Dual AC", "Lanai"],
     description:
       "Unit 128 is one of the larger units in the complex, offering plenty of space for families or two couples traveling together. The wraparound lanai catches both garden breezes and peeks of blue Pacific horizon. Inside, you'll find two full bathrooms, a well-equipped kitchen with island seating, and a sleeper sofa in the living room for an extra guest.",
     amenities: [
@@ -283,16 +283,16 @@ export const UNITS: Unit[] = [
     ],
     vrboUrl: "https://www.vrbo.com/",
     nightlyFrom: 320,
-  }),
-  withPulled({
+  })),
+  withManual(withPulled({
     id: "151",
     name: "Unit 151",
     tagline: "Romantic ground-floor garden villa with direct outdoor access",
     bedrooms: 1,
     bathrooms: 1,
-    maxGuests: 2,
-    sqft: 720,
-    view: "Tropical Garden View",
+    maxGuests: 4,
+    view: "Garden View",
+    quickTags: ["Ground floor", "Dual AC", "Lanai"],
     description:
       "Unit 151 is a ground-floor one-bedroom villa that opens directly onto the resort's fragrant tropical gardens. Step outside your sliding glass door and you're immediately in paradise — with birdsong, plumeria blossoms, and the smell of sea air. The condo has been lovingly furnished with a romantic island aesthetic and is ideal for couples seeking quiet seclusion.",
     amenities: [
@@ -331,7 +331,7 @@ export const UNITS: Unit[] = [
     ],
     vrboUrl: "https://www.vrbo.com/",
     nightlyFrom: 210,
-  }),
+  })),
 ];
 
 export const UNITS_BY_ID: Record<string, Unit> = Object.fromEntries(
