@@ -19,14 +19,14 @@ export default function RootLayout({
       <body className={`${geist.variable} font-sans antialiased bg-white text-stone-900`}>
         <Nav />
         {children}
-        <footer className="mt-24 border-t border-stone-100 py-10 px-6">
+        <footer className="mt-8 border-t border-stone-100 py-8 px-6">
           <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-stone-400">
-            <span>© {new Date().getFullYear()} Kiahuna Condos · Poipu, Kauai, Hawaii</span>
+            <span>Kiahuna Condos · Poipu, Kauai, Hawaii</span>
             <a
-              href="mailto:owner@kiahunacondos.com"
+              href="mailto:deenaarnoldca@gmail.com"
               className="hover:text-stone-600 transition-colors"
             >
-              owner@kiahunacondos.com
+              deenaarnoldca@gmail.com
             </a>
           </div>
         </footer>

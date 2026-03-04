@@ -243,41 +243,38 @@ export default function Home() {
       </section>
 
       {/* Trust section */}
-      <section className="border-t border-stone-100 py-20 px-6">
+      <section className="border-t border-stone-100 bg-stone-50 py-16 px-6">
         <div className="max-w-5xl mx-auto">
 
-          {/* Host credentials */}
-          <div className="flex flex-col sm:flex-row sm:items-center gap-6 sm:gap-16 mb-16">
-            <div className="flex items-center gap-3">
-              <div className="flex items-center justify-center w-9 h-9 rounded-full bg-stone-900 shrink-0">
-                <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
+          {/* VRBO credential card + summary copy */}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-6 mb-10">
+            <div className="flex items-center gap-3 bg-white rounded-xl px-5 py-4 shadow-sm shrink-0" style={{ border: "1.5px solid #1B6FEE" }}>
+              <div className="relative w-12 h-12 shrink-0">
+                <Image src="/vrbo-logo.png" alt="VRBO" fill className="object-contain" unoptimized />
               </div>
               <div>
-                <p className="text-sm font-medium text-stone-800">VRBO Premier Host</p>
+                <p className="text-sm font-semibold text-stone-800">VRBO Premier Host</p>
                 <p className="text-xs text-stone-400">Top 10% of properties based on guest reviews</p>
               </div>
             </div>
-            <div className="h-px sm:h-8 sm:w-px bg-stone-100" />
-            <p className="text-sm text-stone-400 leading-relaxed max-w-md">
-              Every unit is privately owned and personally managed. Guests consistently rate cleanliness,
-              communication, and location as top strengths across all five condos.
+            <p className="text-sm text-stone-500 leading-relaxed">
+              Across all five condos, guests consistently mention the same things: spotless spaces, thoughtful hosting, and an easy walk to Poipu Beach. Here are a few recent notes from stays in our units.
             </p>
           </div>
 
-          {/* Review quotes */}
-          <div className="grid sm:grid-cols-3 gap-6">
+          {/* Review cards */}
+          <div className="grid sm:grid-cols-3 gap-5">
             {[
-              { quote: "Deena is a terrific host — quick to respond and thoughtful with details. Clean, comfy, quiet. Highly recommend.", attr: "Patricia · Unit 35 · September 2025" },
-              { quote: "Updated, immaculate, and comfortable. Check-in was smooth and checkout was effortless. Now that's a vacation.", attr: "Denise M. · Unit 128 · July 2025" },
-              { quote: "Outstanding stay — supplies, decor, comfort, and location were all perfect. We highly recommend this unit.", attr: "Carol P. · Unit 151 · June 2024" },
-            ].map(({ quote, attr }) => (
-              <div key={attr} className="rounded-xl border border-stone-200 bg-stone-50 p-6 flex flex-col gap-4">
-                <p className="text-[15px] text-stone-600 leading-relaxed">"{quote}"</p>
-                <p className="text-xs text-stone-400">{attr}</p>
+              { quote: "Deena is a terrific host — quick to respond and thoughtful with details. Clean, comfy, quiet. Highly recommend.", name: "Patricia", unit: "Unit 35", date: "September 2025" },
+              { quote: "Updated, immaculate, and comfortable. Check-in was smooth and checkout was effortless. Now that's a vacation.", name: "Denise M.", unit: "Unit 128", date: "July 2025" },
+              { quote: "Outstanding stay — supplies, decor, comfort, and location were all perfect. We highly recommend this unit.", name: "Carol P.", unit: "Unit 151", date: "June 2024" },
+            ].map(({ quote, name, unit, date }) => (
+              <div key={name} className="bg-white border border-stone-200 rounded-xl p-5 shadow-sm flex flex-col gap-3">
+                <p className="text-sm text-stone-700 leading-relaxed">"{quote}"</p>
+                <p className="text-xs text-stone-400">{name} &nbsp;·&nbsp; {unit} &nbsp;·&nbsp; {date}</p>
               </div>
-            ))}</div>
+            ))}
+          </div>
 
         </div>
       </section>

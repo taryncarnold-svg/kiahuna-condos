@@ -64,7 +64,7 @@ const amenityTiles = [
   },
   {
     title: "Kauai Surf School",
-    body: "Daily surf lessons right on the lawn.",
+    body: "Daily surf lessons available to book right from the lawn.",
     image:
       "https://kauaisurfschool.com/wp-content/uploads/2022/03/kauai-surf-school-poipu-lessons.jpg",
   },
@@ -87,7 +87,7 @@ export default function KiahunaGuidePage() {
       </div>
 
       {/* ── Hero text ────────────────────────────────────────────────── */}
-      <section className="max-w-2xl mx-auto px-6 pt-10 pb-12">
+      <section className="max-w-2xl mx-auto px-6 pt-8 pb-8">
         <h1 className="text-4xl sm:text-5xl font-light text-stone-900 leading-snug mb-4">
           Stay where the lawn meets the ocean.
         </h1>
@@ -99,7 +99,7 @@ export default function KiahunaGuidePage() {
       </section>
 
       {/* ── Map ──────────────────────────────────────────────────────── */}
-      <section className="px-6 pb-16">
+      <section className="px-6 pb-10">
         <div className="max-w-4xl mx-auto">
           <div className="rounded-2xl overflow-hidden shadow-sm border border-stone-100 h-52 sm:h-[300px]">
             <iframe
@@ -119,12 +119,12 @@ export default function KiahunaGuidePage() {
       </section>
 
       {/* ── Walkable favorites ───────────────────────────────────────── */}
-      <section className="border-t border-stone-100 py-16 px-6">
+      <section className="border-t border-stone-100 py-10 px-6">
         <div className="max-w-2xl mx-auto">
-          <p className="text-[11px] tracking-[0.2em] uppercase text-stone-400 mb-12">
+          <p className="text-[11px] tracking-[0.2em] uppercase text-stone-400 mb-6">
             Walkable favorites
           </p>
-          <div className="space-y-12">
+          <div className="space-y-7">
             {favorites.map(({ name, blurb }) => (
               <div key={name} className="grid sm:grid-cols-[160px_1fr] gap-1.5 sm:gap-10">
                 <p className="font-semibold text-stone-800 text-sm">{name}</p>
@@ -136,9 +136,9 @@ export default function KiahunaGuidePage() {
       </section>
 
       {/* ── Amenity tile grid ────────────────────────────────────────── */}
-      <section className="border-t border-stone-100 py-16 px-6">
+      <section className="border-t border-stone-100 py-10 px-6">
         <div className="max-w-5xl mx-auto">
-          <p className="text-[11px] tracking-[0.2em] uppercase text-stone-400 mb-12">
+          <p className="text-[11px] tracking-[0.2em] uppercase text-stone-400 mb-6">
             What you get at Kiahuna Plantation
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -162,7 +162,7 @@ export default function KiahunaGuidePage() {
       </section>
 
       {/* ── CTA ──────────────────────────────────────────────────────── */}
-      <section className="border-t border-stone-100 py-16 px-6">
+      <section className="border-t border-stone-100 py-10 px-6">
         <div className="max-w-2xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div>
             <p className="font-medium text-stone-800 mb-1">Ready to book your stay?</p>

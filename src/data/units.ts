@@ -339,4 +339,4 @@ export const UNITS_BY_ID: Record<string, Unit> = Object.fromEntries(
 );
 
 /** Email address for direct booking requests */
-export const BOOKING_EMAIL = "owner@kiahunacondos.com";
+export const BOOKING_EMAIL = "deenaarnoldca@gmail.com";

@@ -108,8 +108,8 @@ export default function HostPage() {
           </div>
           <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
             <Image
-              src="https://media.vrbo.com/lodging/34000000/33500000/33492900/33492811/763a3ce5.jpg?impolicy=resizecrop&rw=1200&ra=fit"
-              alt="Pool at Kiahuna Plantation"
+              src="https://media.vrbo.com/lodging/104000000/103640000/103636400/103636320/648485f6.jpg?impolicy=resizecrop&rw=1200&ra=fit"
+              alt="Ocean view at Kiahuna Plantation"
               fill
               className="object-cover object-center"
               unoptimized
