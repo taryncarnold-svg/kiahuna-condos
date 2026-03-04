@@ -150,12 +150,6 @@ export default function ContactPage() {
             See our FAQ
           </Link>
         </span>
-        <span>
-          🏠{" "}
-          <Link href="/compare" className="text-teal-600 hover:underline">
-            Compare units
-          </Link>
-        </span>
       </div>
     </main>
   );

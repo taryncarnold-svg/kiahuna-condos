@@ -166,9 +166,6 @@ export default function KiahunaGuidePage() {
         <div className="max-w-2xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div>
             <p className="font-medium text-stone-800 mb-1">Ready to book your stay?</p>
-            <p className="text-sm text-stone-400">
-              Reach the owner directly — no platform fees.
-            </p>
           </div>
           <Link
             href="/"
