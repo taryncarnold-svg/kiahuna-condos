@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { UNITS_BY_ID, BOOKING_EMAIL } from "@/data/units";
+import UnitGallery from "@/components/UnitGallery";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -63,23 +63,7 @@ export default async function UnitPage({ params }: Props) {
       </div>
 
       {/* Photos */}
-      <div className="grid grid-cols-3 gap-2 mb-8 rounded-2xl overflow-hidden">
-        {unit.photos.map((src, i) => (
-          <div
-            key={i}
-            className={`relative bg-stone-100 ${i === 0 ? "col-span-2 row-span-2 h-72" : "h-[138px]"}`}
-          >
-            <Image
-              src={src}
-              alt={`${unit.name} photo ${i + 1}`}
-              fill
-              className="object-cover"
-              unoptimized
-              priority={i === 0}
-            />
-          </div>
-        ))}
-      </div>
+      <UnitGallery photos={unit.photos} unitName={unit.name} />
 
       <div className="grid lg:grid-cols-3 gap-10">
         {/* Left: details */}
@@ -138,17 +122,13 @@ export default async function UnitPage({ params }: Props) {
         {/* Right: booking sidebar */}
         <aside className="space-y-4">
           <div className="bg-white border border-stone-200 rounded-2xl p-6 shadow-sm sticky top-20">
-            <p className="text-xl font-bold text-stone-800 mb-1">
+            <p className="text-xl font-bold text-stone-800 mb-5">
               from <span className="text-teal-700">${unit.nightlyFrom}</span>
               <span className="text-sm font-normal text-stone-400"> / night</span>
             </p>
-            <p className="text-xs text-stone-400 mb-5">
-              Book direct — no platform fees
-            </p>
-
             <a
               href={bookingHref}
-              className="block text-center bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 px-4 rounded-xl transition-colors mb-3"
+              className="block text-center bg-teal-600 hover:bg-teal-700 active:bg-teal-800 text-white font-semibold py-3 px-4 rounded-xl transition-colors mb-3"
             >
               Request Booking
             </a>
@@ -157,7 +137,7 @@ export default async function UnitPage({ params }: Props) {
               href={unit.vrboUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="block text-center border border-stone-200 hover:bg-stone-50 text-stone-600 font-medium py-3 px-4 rounded-xl transition-colors text-sm"
+              className="block text-center border border-stone-200 hover:border-stone-300 hover:bg-stone-50 active:bg-stone-100 text-stone-600 font-semibold py-3 px-4 rounded-xl transition-colors"
             >
               View on VRBO ↗
             </a>
@@ -169,18 +149,6 @@ export default async function UnitPage({ params }: Props) {
             </p>
           </div>
 
-          <div className="bg-teal-50 border border-teal-100 rounded-2xl p-4 text-sm text-teal-800">
-            <p className="font-semibold mb-1">Compare units</p>
-            <p className="text-teal-600 text-xs mb-3">
-              Not sure this is the right fit? See all units side by side.
-            </p>
-            <Link
-              href="/compare"
-              className="text-teal-700 font-medium hover:underline text-xs"
-            >
-              Compare all units →
-            </Link>
-          </div>
         </aside>
       </div>
     </main>

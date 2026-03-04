@@ -193,21 +193,21 @@ export default function Home() {
                 className={`flex flex-col transition-all duration-300 ${hoveredUnit && hoveredUnit !== unit.id ? "grayscale-[0.6] opacity-70" : ""}`}
               >
                 {/* Photo */}
-                <div className="relative h-56 rounded-xl overflow-hidden bg-stone-100 mb-4">
+                <Link href={`/units/${unit.id}`} className="relative h-56 rounded-xl overflow-hidden bg-stone-100 mb-4 block group">
                   <Image
                     src={unit.photos[0]}
                     alt={unit.name}
                     fill
-                    className={`object-cover motion-safe:transition-all motion-safe:duration-200 ${isUnavailable ? "brightness-90 saturate-[0.55]" : ""}`}
+                    className={`object-cover motion-safe:transition-all motion-safe:duration-200 group-hover:brightness-95 ${isUnavailable ? "brightness-90 saturate-[0.55]" : ""}`}
                     unoptimized
                   />
                   <div className={`absolute inset-0 bg-stone-100/30 motion-safe:transition-opacity motion-safe:duration-200 ${isUnavailable ? "opacity-100" : "opacity-0"}`} />
                   {searched && <AvailabilityPill status={available} />}
-                </div>
+                </Link>
 
                 {/* Row 1: Title · Price */}
                 <div className="flex items-baseline justify-between mb-1">
-                  <h2 className="text-sm font-medium text-stone-800">{unit.name}</h2>
+                  <Link href={`/units/${unit.id}`} className="text-sm font-medium text-stone-800 hover:text-teal-700 transition-colors">{unit.name}</Link>
                   <span className="text-sm font-medium text-stone-700 shrink-0 ml-2">From ${unit.nightlyFrom} <span className="text-xs font-normal text-stone-400">/ night</span></span>
                 </div>
 
