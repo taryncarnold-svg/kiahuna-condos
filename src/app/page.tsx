@@ -21,16 +21,14 @@ function bookingMailto(unitId: string, checkIn: string, checkOut: string) {
 function AvailabilityDot({ status }: { status: boolean | null }) {
   return (
     <span
-      className={`absolute top-3 right-3 flex items-center justify-center gap-1.5 rounded-full bg-white/90 backdrop-blur px-2.5 py-1 text-xs font-medium shadow-sm min-w-[88px] motion-safe:transition-opacity motion-safe:duration-150 motion-safe:ease-out ${
-        status === null ? "opacity-0 pointer-events-none" : "opacity-100"
-      } ${status === true ? "text-stone-600" : "text-stone-400"}`}
+      className={`absolute top-3 right-3 flex items-center justify-center gap-1.5 rounded-full bg-white/90 backdrop-blur px-2.5 py-1 text-xs font-medium shadow-sm min-w-[88px] ${status === true ? "text-stone-600" : "text-stone-400"}`}
     >
       <span
         className={`h-1.5 w-1.5 rounded-full flex-shrink-0 ${
           status === true ? "bg-emerald-700/60" : "bg-stone-300"
         }`}
       />
-      {status === true ? "Available" : "Booked"}
+      {status === true ? "Available" : status === false ? "Booked" : "—"}
     </span>
   );
 }
@@ -195,7 +193,7 @@ export default function Home() {
                     unoptimized
                   />
                   <div className={`absolute inset-0 bg-stone-100/30 motion-safe:transition-opacity motion-safe:duration-200 ${isUnavailable ? "opacity-100" : "opacity-0"}`} />
-                  {datesSelected && <AvailabilityDot status={available} />}
+                  {searched && <AvailabilityDot status={available} />}
                 </div>
 
                 {/* Row 1: Title · Price */}
