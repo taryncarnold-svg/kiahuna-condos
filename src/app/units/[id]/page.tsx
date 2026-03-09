@@ -128,9 +128,6 @@ export default async function UnitPage({ params }: Props) {
               View on VRBO ↗
             </a>
 
-            <p className="text-xs text-stone-400 mt-4 leading-relaxed">
-              The owner typically responds within a few hours.
-            </p>
           </div>
 
         </aside>
