@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { UNITS_BY_ID, BOOKING_EMAIL } from "@/data/units";
+import { UNITS_BY_ID } from "@/data/units";
 import UnitGallery from "@/components/UnitGallery";
 
 type Props = { params: Promise<{ id: string }> };
@@ -33,12 +33,6 @@ export default async function UnitPage({ params }: Props) {
   const unit = UNITS_BY_ID[id];
   if (!unit) notFound();
 
-  const bookingSubject = encodeURIComponent(`Booking Request – ${unit.name}`);
-  const bookingBody = encodeURIComponent(
-    `Hi,\n\nI'm interested in booking ${unit.name} at Kiahuna Plantation.\n\nCheck-in: \nCheck-out: \nNumber of guests: \n\nPlease let me know about availability and pricing. Thank you!`
-  );
-  const bookingHref = `mailto:${BOOKING_EMAIL}?subject=${bookingSubject}&body=${bookingBody}`;
-
   return (
     <main className="max-w-5xl mx-auto px-4 py-10">
       {/* Back */}
@@ -49,16 +43,9 @@ export default async function UnitPage({ params }: Props) {
       {/* Header */}
       <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
         <div>
-          <p className="text-xs text-stone-400 mb-1 tracking-wide">Unit {unit.id}</p>
+          <p className="text-xs text-stone-400 mb-1 tracking-wide">Unit {unit.id} · {unit.view}</p>
           <h1 className="text-3xl font-bold text-stone-800">{unit.name}</h1>
           <p className="text-stone-500 mt-1">{unit.tagline}</p>
-        </div>
-        <div className="text-right">
-          <p className="text-2xl font-bold text-teal-700">
-            from ${unit.nightlyFrom}
-            <span className="text-base font-normal text-stone-400"> / night</span>
-          </p>
-          <p className="text-xs text-stone-400 mt-0.5">{unit.view}</p>
         </div>
       </div>
 
@@ -119,19 +106,18 @@ export default async function UnitPage({ params }: Props) {
           </section>
         </div>
 
-        {/* Right: booking sidebar */}
+        {/* Right: inquiry sidebar */}
         <aside className="space-y-4">
           <div className="bg-white border border-stone-200 rounded-2xl p-6 shadow-sm sticky top-20">
-            <p className="text-xl font-bold text-stone-800 mb-5">
-              from <span className="text-teal-700">${unit.nightlyFrom}</span>
-              <span className="text-sm font-normal text-stone-400"> / night</span>
+            <p className="text-sm text-stone-500 mb-4 leading-relaxed">
+              Interested in this unit? Send the owner a message — no commitment required.
             </p>
-            <a
-              href={bookingHref}
+            <Link
+              href={`/contact?unit=${unit.id}`}
               className="block text-center bg-teal-600 hover:bg-teal-700 active:bg-teal-800 text-white font-semibold py-3 px-4 rounded-xl transition-colors mb-3"
             >
-              Request Booking
-            </a>
+              Message the owner
+            </Link>
 
             <a
               href={unit.vrboUrl}
@@ -143,9 +129,7 @@ export default async function UnitPage({ params }: Props) {
             </a>
 
             <p className="text-xs text-stone-400 mt-4 leading-relaxed">
-              Clicking "Request Booking" opens your email client with your
-              dates and unit details prefilled. The owner typically responds
-              within a few hours.
+              The owner typically responds within a few hours.
             </p>
           </div>
 

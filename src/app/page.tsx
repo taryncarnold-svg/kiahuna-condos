@@ -2,21 +2,13 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { UNITS, BOOKING_EMAIL } from "@/data/units";
+import { UNITS } from "@/data/units";
 
 type AvailabilityResult = {
   unit: string;
   available: boolean | null;
   error?: string;
 };
-
-function bookingMailto(unitId: string, checkIn: string, checkOut: string) {
-  const subject = encodeURIComponent(`Booking request — Unit ${unitId}`);
-  const body = encodeURIComponent(
-    `Hi,\n\nI'd like to enquire about Unit ${unitId} at Kiahuna Plantation.\n\nCheck-in: ${checkIn}\nCheck-out: ${checkOut}\n\nPlease let me know about availability and next steps. Thank you.`
-  );
-  return `mailto:${BOOKING_EMAIL}?subject=${subject}&body=${body}`;
-}
 
 function AvailabilityPill({ status }: { status: boolean | null }) {
   if (status === true) {
@@ -205,10 +197,9 @@ export default function Home() {
                   {searched && <AvailabilityPill status={available} />}
                 </Link>
 
-                {/* Row 1: Title · Price */}
+                {/* Row 1: Title */}
                 <div className="flex items-baseline justify-between mb-1">
                   <Link href={`/units/${unit.id}`} className="text-sm font-medium text-stone-800 hover:text-teal-700 transition-colors">{unit.name}</Link>
-                  <span className="text-sm font-medium text-stone-700 shrink-0 ml-2">From ${unit.nightlyFrom} <span className="text-xs font-normal text-stone-400">/ night</span></span>
                 </div>
 
                 {/* Row 2: Specs · Unit number */}
@@ -226,12 +217,12 @@ export default function Home() {
                     View
                   </Link>
                   {datesSelected && available !== false ? (
-                    <a
-                      href={bookingMailto(unit.id, checkIn, checkOut)}
+                    <Link
+                      href={`/contact?unit=${unit.id}&checkIn=${checkIn}&checkOut=${checkOut}`}
                       className="flex-1 text-center bg-stone-900 hover:bg-stone-700 text-white text-xs font-medium py-2 rounded-lg transition-colors"
                     >
-                      Request booking
-                    </a>
+                      Message the owner
+                    </Link>
                   ) : (
                     <a
                       href={unit.vrboUrl}
