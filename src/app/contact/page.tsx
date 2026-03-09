@@ -76,16 +76,6 @@ function ContactForm() {
           She typically responds within a few hours. You&apos;ll hear back at{" "}
           <span className="text-stone-700">{email}</span>.
         </p>
-        <p className="text-sm text-stone-500">
-          If you don&apos;t see a reply within 24 hours, feel free to email her directly at{" "}
-          <a
-            href={`mailto:${BOOKING_EMAIL}`}
-            className="font-semibold text-teal-700 hover:underline break-all"
-          >
-            {BOOKING_EMAIL}
-          </a>
-          .
-        </p>
         <Link
           href="/"
           className="inline-block mt-2 text-sm text-teal-600 hover:underline"
