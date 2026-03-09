@@ -7,12 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "pull:vrbo": "tsx scripts/pull-vrbo.ts" 
+    "pull:vrbo": "tsx scripts/pull-vrbo.ts"
   },
   "dependencies": {
     "cheerio": "^1.2.0",
     "ical.js": "^2.2.1",
     "next": "16.1.6",
+    "nodemailer": "^8.0.2",
     "p-limit": "^7.3.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
@@ -21,6 +22,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/nodemailer": "^7.0.11",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",

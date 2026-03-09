@@ -4,10 +4,6 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { UNITS, BOOKING_EMAIL } from "@/data/units";
 
-// Formspree form ID — set NEXT_PUBLIC_FORMSPREE_ID in your .env.local
-// Sign up at https://formspree.io, create a form, and paste the ID here.
-const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID ?? "";
-
 const inputClass =
   "w-full border border-stone-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-stone-400 bg-white";
 
@@ -40,35 +36,12 @@ function ContactForm() {
     e.preventDefault();
     if (!name.trim() || !email.trim()) return;
 
-    if (!FORMSPREE_ID) {
-      // Fallback: open email client if Formspree isn't configured yet
-      const unitLabel = unit ? `Unit ${unit}` : "a condo";
-      const subject = encodeURIComponent(
-        unit ? `Inquiry – Unit ${unit}` : "Inquiry – Kiahuna Condos"
-      );
-      const lines = [
-        `Hi, my name is ${name}.`,
-        "",
-        unit && checkIn && checkOut
-          ? `I'm interested in ${unitLabel}.\n\nCheck-in: ${checkIn}\nCheck-out: ${checkOut}`
-          : unit
-          ? `I'm interested in ${unitLabel} at Kiahuna Plantation.`
-          : "I'm interested in one of your Kiahuna Plantation condos.",
-        message ? `\n${message}` : "",
-        "",
-        "Please let me know about availability and next steps. Thank you!",
-      ];
-      const body = encodeURIComponent(lines.join("\n").trim());
-      window.location.href = `mailto:${BOOKING_EMAIL}?subject=${subject}&body=${body}`;
-      return;
-    }
-
     setSubmitting(true);
     setError("");
     try {
-      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+      const res = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name,
           email,
@@ -78,11 +51,11 @@ function ContactForm() {
           message,
         }),
       });
+      const data = await res.json().catch(() => ({}));
       if (res.ok) {
         setSubmitted(true);
       } else {
-        const data = await res.json().catch(() => ({}));
-        setError(data?.errors?.[0]?.message ?? "Something went wrong. Please try again or email us directly.");
+        setError(data?.error ?? "Something went wrong. Please try again or email us directly.");
       }
     } catch {
       setError("Could not send your message. Please email us directly.");
@@ -97,8 +70,21 @@ function ContactForm() {
         <div className="text-3xl">✉️</div>
         <h2 className="text-lg font-semibold text-stone-800">Message sent!</h2>
         <p className="text-sm text-stone-500">
-          Thanks, {name.split(" ")[0]}. The owner typically responds within a few hours.
-          You'll hear back at <span className="text-stone-700">{email}</span>.
+          Thanks, {name.split(" ")[0]}! Your message was sent to Deena.
+        </p>
+        <p className="text-sm text-stone-500">
+          She typically responds within a few hours. You&apos;ll hear back at{" "}
+          <span className="text-stone-700">{email}</span>.
+        </p>
+        <p className="text-sm text-stone-500">
+          If you don&apos;t see a reply within 24 hours, feel free to email her directly at{" "}
+          <a
+            href={`mailto:${BOOKING_EMAIL}`}
+            className="font-semibold text-teal-700 hover:underline break-all"
+          >
+            {BOOKING_EMAIL}
+          </a>
+          .
         </p>
         <Link
           href="/"
@@ -203,7 +189,7 @@ function ContactForm() {
         </label>
         <textarea
           rows={4}
-          placeholder="Questions, number of guests, special requests…"
+          placeholder="Tell Deena a bit about your trip — number of guests, dates you're considering, or any questions."
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           className={`${inputClass} resize-none`}
@@ -219,7 +205,7 @@ function ContactForm() {
         disabled={submitting || !name.trim() || !email.trim()}
         className="w-full bg-stone-900 hover:bg-stone-700 disabled:bg-stone-200 disabled:text-stone-400 text-white text-sm font-medium py-2.5 px-4 rounded-xl transition-colors"
       >
-        {submitting ? "Sending…" : "Send message"}
+        {submitting ? "Sending…" : "Send your message"}
       </button>
     </form>
   );
@@ -248,6 +234,8 @@ export default function ContactPage() {
             {BOOKING_EMAIL}
           </a>
           , or use the form below.
+          <br />
+          Deena typically responds within a few hours.
         </p>
       </div>
 
